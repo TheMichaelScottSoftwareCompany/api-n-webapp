@@ -4,13 +4,14 @@
   "description": "Coronavirus app",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev:server": "nodemon server.js --exec babel-node --presets babel-preset-env",
+    "start": "node dist/server.js",
+    "dev:server": "nodemon server/server.js --exec babel-node --ignore client",
     "dev:client": "npm start --prefix client",
+    "build:server": "babel server -d dist",
     "build:client": "npm run build --prefix client",
     "install:client": "npm install --prefix client",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm run build:server"
   },
   "author": "",
   "license": "ISC",
@@ -22,9 +23,10 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
     "nodemon": "^2.0.2"
   }
 }
