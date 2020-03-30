@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,6 +21,9 @@ import StickyHeadTable from "./Table";
 import { Grid, Paper } from "@material-ui/core";
 import News from "./News";
 import NewsSnack from "./NewsSnack";
+import CountrySelect from "./SelectCity";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
 
 const drawerWidth = 240;
 
@@ -83,6 +86,52 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3)
+  },
+  title: {
+    flexGrow: 1,
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block"
+    }
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25)
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto"
+    }
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  inputRoot: {
+    color: "inherit"
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch"
+      }
+    }
   }
 }));
 
@@ -101,7 +150,6 @@ export default function MiniDrawer() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -120,9 +168,31 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Something h6
-          </Typography>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="flex-start"
+          >
+            <Typography variant="h6" noWrap>
+              COVID-19 India Dashboard
+            </Typography>
+          </Grid>
+          <Grid container direction="row" justify="center" alignItems="center">
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </div>
+          </Grid>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -194,7 +264,7 @@ export default function MiniDrawer() {
               alignItems="center"
             >
               <Paper>
-                <NewsSnack />
+                <News />
               </Paper>
             </Grid>
             <Grid
@@ -205,9 +275,7 @@ export default function MiniDrawer() {
               justify="space-evenly"
               alignItems="center"
             >
-              <Paper>
-                <Typography>Msp goes here i guess</Typography>
-              </Paper>
+              <Paper></Paper>
             </Grid>
           </Grid>
         </Grid>
