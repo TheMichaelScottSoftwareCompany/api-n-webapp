@@ -5,7 +5,6 @@ import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -17,13 +16,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import StickyHeadTable from "./Table";
+import TableStates from "./Table";
 import { Grid, Paper } from "@material-ui/core";
 import News from "./News";
-import NewsSnack from "./NewsSnack";
-import CountrySelect from "./SelectCity";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
+import RefreshFloat from "./Refresh";
+import { deepPurple, grey, purple } from "@material-ui/core/colors";
 
 const drawerWidth = 240;
 
@@ -132,6 +131,11 @@ const useStyles = makeStyles(theme => ({
         width: "20ch"
       }
     }
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary
   }
 }));
 
@@ -175,7 +179,7 @@ export default function MiniDrawer() {
             alignItems="flex-start"
           >
             <Typography variant="h6" noWrap>
-              COVID-19 India Dashboard
+              COVID-19 India
             </Typography>
           </Grid>
           <Grid container direction="row" justify="center" alignItems="center">
@@ -192,6 +196,9 @@ export default function MiniDrawer() {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
+          </Grid>
+          <Grid>
+            <RefreshFloat />
           </Grid>
         </Toolbar>
       </AppBar>
@@ -242,43 +249,25 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Grid Grid container spacing={3}>
-          <Grid
-            item
-            xs={6}
-            container
-            direction="column"
-            justify="space-evenly"
-            alignItems="center"
-          >
-            <Paper>
-              <StickyHeadTable />
-            </Paper>
-
-            <Grid
-              item
-              xs={6}
-              container
-              direction="row"
-              justify="space-evenly"
-              alignItems="center"
-            >
-              <Paper>
-                <News />
-              </Paper>
+        <div className={classes.root}>
+          <Grid container spacing={3}>
+            <Grid xs={12} sm={12} md={6}>
+              <News />
+            </Grid>
+            <Grid xs={12} sm={12} md={6}>
+              <News />
+            </Grid>
+            <Grid item justify="center" alignItems="center" md={12}>
+              <TableStates />
             </Grid>
             <Grid
-              item
-              xs={6}
               container
               direction="column"
-              justify="space-evenly"
+              justify="center"
               alignItems="center"
-            >
-              <Paper></Paper>
-            </Grid>
+            ></Grid>
           </Grid>
-        </Grid>
+        </div>
       </main>
     </div>
   );

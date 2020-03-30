@@ -1,0 +1,5 @@
+@font-face{
+  font-family: "YoutubeSans";
+  src: url('https://igareeb.co/fonts/YouTubeSansMedium.otf') format('otf'),
+	url('./fonts/YouTubeSansMedium.otf') format(otf)
+}

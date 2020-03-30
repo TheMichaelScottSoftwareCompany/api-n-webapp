@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import { Link, Button } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,26 +39,33 @@ export default function News() {
               <img
                 className={classes.img}
                 alt="complex"
-                src="/static/images/grid/complex.jpg"
+                src="https://cdn.pixabay.com/photo/2020/03/21/00/48/world-4952390_1280.jpg"
               />
             </ButtonBase>
           </Grid>
-          <Grid item xs={12} sm container>
+          <Grid item xs={12} sm={12} md={6} lg={6} container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                  News Heading
+                  COVID-19 Update
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  News Descriptionm maybe
+                  Coronavirus outbreak live updates:
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  ID: 1030114
+                  India has taken unprecedented and early steps to deal with
+                  coronavirus pandemic, says PM
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography variant="body2" style={{ cursor: "pointer" }}>
-                  Why this box? idk
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    href="#outlined-buttons"
+                  >
+                    Read more
+                  </Button>
                 </Typography>
               </Grid>
             </Grid>
